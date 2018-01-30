@@ -76,7 +76,7 @@ options:
         required: true
     file:
         description:
-            - File name wth job configuration. You shouldn't set path and job with this var
+            - File name wth job configuration. You shouldn't set jobs with this var
         required: true
     workers:
         description:
@@ -113,8 +113,8 @@ EXAMPLES = '''
 # Update or create all jobs from file
 - name: Generate jobs
   jenkins_job_generator:
-    file:
-      - /tmp/production.yaml
+    file: production.yaml
+    path: /tmp
     action: update
     user: jenkins
     password: jenkins
@@ -300,10 +300,10 @@ class ActionRunner(object):
         if path is not None and jobs is not None:
             action_options.append(path)
             action_options.extend(jobs)
+        elif path is not None and file is not None:
+            action_options.append(path + '/' + file)
         elif path is not None:
             action_options.append(path)
-        elif file is not None:
-            action_options.append(file)
         else:
             raise Exception('Incorrect options. File or path with job files should be provided')
 

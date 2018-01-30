@@ -32,13 +32,17 @@ Options
             - User password
         required: false
         default: ''
-    files:
+    jobs:
         description:
-            - List of files with jenkins job config. File should be in YAML format.
+            - List of jobs which you want to update or delete. Note: Path variable should be set
         required: true
     path:
         description:
             - Path to job configuration files
+        required: true
+    file:
+        description:
+            - File name wth job configuration. You shouldn't set jobs with this var
         required: true
     workers:
         description:
@@ -67,13 +71,31 @@ Examples
       template:
         src: jobs/production.yaml.j2
         dest: /tmp/production.yaml
-
-    # Update or create jobs
+    
+    # Update or create all jobs from file
     - name: Generate jobs
       jenkins_job_generator:
-        files:
-          - production.yaml
+        file: production.yaml
         path: /tmp
+        action: update
+        user: jenkins
+        password: jenkins
+    
+    # Update or create all jobs in the path
+    - name: Generate jobs
+      jenkins_job_generator:
+        path: /tmp
+        action: update
+        user: jenkins
+        password: jenkins
+    
+    # Update or create selected jobs in the path
+    - name: Generate jobs
+      jenkins_job_generator:
+        path: /tmp
+        jobs:
+          - build
+          - test
         action: update
         user: jenkins
         password: jenkins
