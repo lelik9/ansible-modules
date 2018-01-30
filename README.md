@@ -1,1 +1,2 @@
 # ansible-modules
+[![Build Status](http://ec2-34-207-191-78.compute-1.amazonaws.com:8080/buildStatus/icon?job=ansible-modules)](http://ec2-34-207-191-78.compute-1.amazonaws.com:8080/job/ansible-modules/)
