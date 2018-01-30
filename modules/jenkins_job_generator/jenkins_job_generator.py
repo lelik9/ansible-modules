@@ -24,7 +24,9 @@ except ImportError as e:
     print(json.dumps(
         {
             'original_message': str(e),
-            'message': 'Jenkins Job Builder not found in system. Please install it: pip install jenkins-job-builder'
+            'message': 'Jenkins Job Builder not found in system. Please install it: pip install jenkins-job-builder',
+            'changed': False,
+            'failed': True
         }
     ))
     sys.exit(1)
