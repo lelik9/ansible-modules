@@ -195,9 +195,8 @@ class JobBuilder(JenkinsManager):
         cl2 = x2.getchildren()
         if len(cl1) != len(cl2):
             return False
-        i = 0
+
         for c1, c2 in zip(cl1, cl2):
-            i += 1
             if not self.xml_compare(c1, c2):
                 return False
         return True
